@@ -6,7 +6,7 @@ class Author(models.Model):
 
 	def __str__(self):
 		return self.name
-		
+
 class Book(models.Model):
 	title = models.CharField(max_length=150)
 	description = models.TextField(blank=True, null=True)
@@ -24,6 +24,12 @@ class Book(models.Model):
 class Narrator(models.Model):
 	narrator = models.CharField(max_length=80)
 
+	def __str__(self):
+		return self.narrator
+
 class Audiobook(Book):
 	length = models.TimeField(blank=False, null=False)
 	narrator = models.ForeignKey(Narrator, on_delete=models.SET_NULL, blank=False, null=True)
+
+	def __str__(self):
+		return self.title

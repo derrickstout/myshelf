@@ -12,6 +12,7 @@ class Book(models.Model):
 	description = models.TextField(blank=True, null=True)
 	series = models.CharField(max_length=150, blank=True, null=True)
 	authors = models.ManyToManyField(Author, blank=True)
+	review = models.TextField(blank=True, null=True)
 	finished = models.BooleanField(default=False, verbose_name="Finished")
 	# image = models.ImageField()
 
@@ -28,7 +29,7 @@ class Narrator(models.Model):
 		return self.narrator
 
 class Audiobook(Book):
-	length = models.TimeField(blank=False, null=False)
+	length = models.CharField(max_length=20)
 	narrator = models.ForeignKey(Narrator, on_delete=models.SET_NULL, blank=False, null=True)
 
 	def __str__(self):

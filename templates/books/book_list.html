@@ -1,0 +1,17 @@
+
+
+{% block content %}
+<!-- 	Figure out a way to test if there are any books-->
+	{% if True %}
+		<ul>
+		{% for book in object_list %}
+			<li><a href="{% url 'books:detail' book.id %}">{{ book.title }}</a></li>
+				<ul>
+				<li>By {{ book.list_authors }}</li>
+				</ul>
+		{% endfor %}
+		</ul>
+	{% else %}
+		<p>You haven't added any books yet</p>
+	{% endif %}
+{% endblock %}

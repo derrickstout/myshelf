@@ -14,8 +14,9 @@
 			<div>
 				{% if request.user.is_authenticated %}
 					<p>{{ request.user.username }}</p>
+					<a href="{% url 'books:logout' %}">Logout</a>
 				{% else %}
-					<a href="{ url 'login' }">Login</a>
+					<a href="{% url 'books:login' %}">Login</a>
 				{% endif %}
 			</div>
 		</header>
@@ -24,7 +25,7 @@
 			{% endblock %}
 		</main>
 		<footer>
-			<p>This is the footer</p>
+			<p>This will be the footer</p>
 		</footer>
 	</body>
 </html>

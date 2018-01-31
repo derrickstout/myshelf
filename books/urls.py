@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.urls import path
 from books.views import BookList
 from django.contrib.auth import views as auth_views 

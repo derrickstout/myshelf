@@ -1,15 +1,15 @@
 from django.contrib import admin
-from .models import (Author, Book)
+from .models import (Author, PrintBook, EBook, Narrator, Audiobook)
 
-@admin.register(Book)
+@admin.register(PrintBook, EBook, Audiobook)
 class BookAdmin(admin.ModelAdmin):
 	fieldsets = [
-		('Details', {'fields': ['title','description','book_type', 'authors', 'series']}),
+		('Details', {'fields': ['title','description', 'authors', 'series']}),
 		('User Input', {'fields': ['review', 'finished',]}),
 	]
 	list_display = ("title", "list_authors", "series", "book_type", "finished",)
 
-	list_editable = ("finished", "book_type",)
+	list_editable = ("finished",)
 
 	list_filter = ("finished", "authors")
 
@@ -24,4 +24,4 @@ class BookAdmin(admin.ModelAdmin):
 
 # Register your models here.
 
-admin.site.register([Author])
+admin.site.register([Author, Narrator])

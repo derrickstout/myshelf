@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, Http404
-from .models import Book
+from .models import (PrintBook, EBook, Audiobook)
 from django.views.generic import ListView, DetailView
 
 # Create your views here.
@@ -23,12 +23,17 @@ def detail(request, book_id):
 	}
 	return render(request, 'books/detail.html', context)
 
+# Need to figure out how to pass all book types to single list view
+def allBooks(ListView):
+	model = PrintBook
+	return render(request, template_name='books/book_list.html')
 
-class BookList(ListView):
-	model = Book
-	#with no template_name specified, Django infers from model and class name "books/book_list.html"
+
+# class BookList(ListView):
+# 	model = Book
+# 	#with no template_name specified, Django infers from model and class name "books/book_list.html"
 
 
-class BookDetail(DetailView):
-	model = Book
-	template_name = "books/book-detail.html"
+# class BookDetail(DetailView):
+# 	model = Book
+# 	template_name = "books/book-detail.html"

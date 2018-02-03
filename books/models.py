@@ -40,17 +40,28 @@ class Book(models.Model):
 	def list_authors(self):
 		return ", ".join([author.name for author in self.authors.all()])
 
+	class Meta:
+		abstract = True
 
-# Removing to simplify, but saving in case I decide it makes sense later on
-# class Narrator(models.Model):
-# 	narrator = models.CharField(max_length=80)
 
-# 	def __str__(self):
-# 		return self.narrator
+class PrintBook(Book):
+	book_type = "PRINT"
 
-# class Audiobook(Book):
-# 	length = models.CharField(max_length=20)
-# 	narrator = models.ForeignKey(Narrator, on_delete=models.SET_NULL, blank=False, null=True)
 
-# 	def __str__(self):
-# 		return self.title
+class EBook(Book):
+	book_type = "EBOOK"
+
+
+class Narrator(models.Model):
+	narrator = models.CharField(max_length=80)
+
+	def __str__(self):
+		return self.narrator
+
+class Audiobook(Book):
+	book_type = "AUDIO"
+	length = models.CharField(max_length=20)
+	narrator = models.ForeignKey(Narrator, on_delete=models.SET_NULL, blank=False, null=True)
+
+	def __str__(self):
+		return self.title

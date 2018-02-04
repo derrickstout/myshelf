@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+
+{% block content %}
+	<!-- SOMETHING ISN'T WORKING HERE... NO DATA... HOW TO QUERY OBJECT IN CLASS-BASED GENERIC VIEW? HOW DOES THE TEMPLATE KNOW THE OBJECT THAT WAS PASSED? THROUGH THE PK? -->
+	<h3>{{ Audiobook.title }}</h3>
+	<p>{{ Audiobook.review }}</p>
+
+{% endblock %}

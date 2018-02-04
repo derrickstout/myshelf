@@ -13,15 +13,25 @@ from django.views.generic import ListView, DetailView
 # 	}
 # 	return render(request, 'books/index.html', context)
 
-def detail(request, book_id):
-	try:
-		book_detail = Book.objects.get(pk=book_id).title, " by ", Book.objects.get(pk=book_id).list_authors()
-	except Book.DoesNotExist:
-		raise Http404("This book doesn't seem to exist")
+def audio(request):
+	# prefetching eliminates duplication for querying authors for every item in a loop
+	audiobook_list = Audiobook.objects.all().prefetch_related('authors')
 	context = {
-	'book_detail': book_detail
+	'audiobook_list': audiobook_list
 	}
-	return render(request, 'books/detail.html', context)
+
+	return render(request, 'books/audiobook_list.html', context)
+
+
+# def detail(request, book_id):
+# 	try:
+# 		book_detail = Book.objects.get(pk=book_id).title, " by ", Book.objects.get(pk=book_id).list_authors()
+# 	except Book.DoesNotExist:
+# 		raise Http404("This book doesn't seem to exist")
+# 	context = {
+# 	'book_detail': book_detail
+# 	}
+# 	return render(request, 'books/detail.html', context)
 
 # Need to figure out how to pass all book types to single list view
 def allBooks(ListView):
@@ -34,6 +44,6 @@ def allBooks(ListView):
 # 	#with no template_name specified, Django infers from model and class name "books/book_list.html"
 
 
-# class BookDetail(DetailView):
-# 	model = Book
-# 	template_name = "books/book-detail.html"
+class AudiobookDetail(DetailView):
+	model = Audiobook
+	template_name = "books/audiobook_detail.html"

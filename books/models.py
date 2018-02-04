@@ -9,22 +9,22 @@ class Author(models.Model):
 		return self.name
 
 class Book(models.Model):
-	PRINT = 'PRINT'
-	AUDIO = 'AUDIO'
-	EBOOK = 'EBOOK'
-	BOOK_TYPE_CHOICES = (
-		(PRINT, 'Print Book'),
-		(AUDIO, 'Audiobook'),
-		(EBOOK, 'eBook'),
-		)
-	#There has to be a better way to do this than multiple choice
-	# NEXT_THREE_RANK_CHOICES	= (
-	# 	(1, '1'),
-	# 	(2, '2'),
-	# 	(3, '3'),
+	# PRINT = 'PRINT'
+	# AUDIO = 'AUDIO'
+	# EBOOK = 'EBOOK'
+	# BOOK_TYPE_CHOICES = (
+	# 	(PRINT, 'Print Book'),
+	# 	(AUDIO, 'Audiobook'),
+	# 	(EBOOK, 'eBook'),
 	# 	)
-	# next_three_rank = models.CharField(max_length=1, choices=NEXT_THREE_RANK_CHOICES, default='null', blank=True, null=True)
-	book_type = models.CharField(max_length=5, choices=BOOK_TYPE_CHOICES, default='AUDIO')
+	# #There has to be a better way to do this than multiple choice
+	# # NEXT_THREE_RANK_CHOICES	= (
+	# # 	(1, '1'),
+	# # 	(2, '2'),
+	# # 	(3, '3'),
+	# # 	)
+	# # next_three_rank = models.CharField(max_length=1, choices=NEXT_THREE_RANK_CHOICES, default='null', blank=True, null=True)
+	# book_type = models.CharField(max_length=5, choices=BOOK_TYPE_CHOICES, default='AUDIO')
 	title = models.CharField(max_length=150)
 	description = models.TextField(blank=True, null=True)
 	series = models.CharField(max_length=150, blank=True, null=True)

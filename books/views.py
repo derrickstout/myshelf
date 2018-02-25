@@ -5,6 +5,26 @@ from django.views.generic import ListView, DetailView
 
 # Create your views here.
 
+def audio(request):
+	# prefetching eliminates duplication for querying authors for every item in a loop
+	audiobook_list = Audiobook.objects.all().prefetch_related('authors')
+	context = {
+	'audiobook_list': audiobook_list
+	}
+	return render(request, 'books/audiobook_list.html', context)
+
+
+class AudiobookDetail(DetailView):
+	model = Audiobook
+	template_name = "books/audiobook_detail.html"
+
+
+# Need to figure out how to pass all book types to single list view
+def allBooks(ListView):
+	model = PrintBook, Audiobook
+	return render(request, template_name='books/book_list.html')
+
+
 # def index(request):
 # 	book_list = Book.objects.all()
 # 	# book_list = ', '.join([b.title for b in books])
@@ -12,15 +32,6 @@ from django.views.generic import ListView, DetailView
 # 	'book_list': book_list
 # 	}
 # 	return render(request, 'books/index.html', context)
-
-def audio(request):
-	# prefetching eliminates duplication for querying authors for every item in a loop
-	audiobook_list = Audiobook.objects.all().prefetch_related('authors')
-	context = {
-	'audiobook_list': audiobook_list
-	}
-
-	return render(request, 'books/audiobook_list.html', context)
 
 
 # def detail(request, book_id):
@@ -33,17 +44,9 @@ def audio(request):
 # 	}
 # 	return render(request, 'books/detail.html', context)
 
-# Need to figure out how to pass all book types to single list view
-def allBooks(ListView):
-	model = PrintBook
-	return render(request, template_name='books/book_list.html')
-
 
 # class BookList(ListView):
 # 	model = Book
 # 	#with no template_name specified, Django infers from model and class name "books/book_list.html"
 
 
-class AudiobookDetail(DetailView):
-	model = Audiobook
-	template_name = "books/audiobook_detail.html"

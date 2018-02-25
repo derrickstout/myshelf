@@ -6,9 +6,20 @@
 		<!-- The apnumber filter comes from the humanize module, allowing numbers under ten to be spelled out -->
 	<h2>{{ audiobook_list.count|apnumber|title }} Audiobook{{ audiobook_list.count|pluralize }}</h2>
 	<!-- Because this is a loop, I've added prefetching to the view for authors to eliminate duplicated queries -->
-	{% for audio in audiobook_list %}
-		<h3>{{ audio.title }}</h3>
-			<li>{{ audio.list_authors }}</li>
-	{% endfor %}
+	{% if audiobook_list %}
+		<ul>
+		{% for audio in audiobook_list %}
+			<li class = "audiobook_card">
+				<!-- Detail links don't work yet. This probably isn't the right way. No get_absolute_url function in model. -->
+				<a href="{{ audio.get_absolute_url }}"><h3>{{ audio.title }}</h3></a>
+				<ul class = "authors">
+					<li><p>{{ audio.list_authors }}</p></li>
+				</ul>
+			</li>
+		{% endfor %}
+		</ul>
+	{% else %}
+		<p>Your audiobook shelf is empty</p>
+	{% endif %}
 
 {% endblock %}
